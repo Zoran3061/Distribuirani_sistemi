@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListHumanitarniKoncertTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListHumanitarniKoncertEmpty}" rendered="#{humanitarniKoncertController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{humanitarniKoncertController.items.rowCount > 0}">
+                    <h:outputText value="#{humanitarniKoncertController.pagination.pageFirstItem + 1}..#{humanitarniKoncertController.pagination.pageLastItem + 1}/#{humanitarniKoncertController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{humanitarniKoncertController.previous}" value="#{bundle.Previous} #{humanitarniKoncertController.pagination.pageSize}" rendered="#{humanitarniKoncertController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{humanitarniKoncertController.next}" value="#{bundle.Next} #{humanitarniKoncertController.pagination.pageSize}" rendered="#{humanitarniKoncertController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{humanitarniKoncertController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListHumanitarniKoncertTitle_humanitarniId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.humanitarniId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListHumanitarniKoncertTitle_nazivUstanove}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nazivUstanove}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListHumanitarniKoncertTitle_koncertId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.koncertId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{humanitarniKoncertController.prepareView}" value="#{bundle.ListHumanitarniKoncertViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{humanitarniKoncertController.prepareEdit}" value="#{bundle.ListHumanitarniKoncertEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{humanitarniKoncertController.destroy}" value="#{bundle.ListHumanitarniKoncertDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{humanitarniKoncertController.prepareCreate}" value="#{bundle.ListHumanitarniKoncertCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListHumanitarniKoncertIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditSnimioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditSnimioLabel_snimioId}" for="snimioId" />
+                    <h:inputText id="snimioId" value="#{snimioController.selected.snimioId}" title="#{bundle.EditSnimioTitle_snimioId}" required="true" requiredMessage="#{bundle.EditSnimioRequiredMessage_snimioId}"/>
+                    <h:outputLabel value="#{bundle.EditSnimioLabel_brojSati}" for="brojSati" />
+                    <h:inputText id="brojSati" value="#{snimioController.selected.brojSati}" title="#{bundle.EditSnimioTitle_brojSati}" />
+                    <h:outputLabel value="#{bundle.EditSnimioLabel_izvodjacId}" for="izvodjacId" />
+                    <h:selectOneMenu id="izvodjacId" value="#{snimioController.selected.izvodjacId}" title="#{bundle.EditSnimioTitle_izvodjacId}" required="true" requiredMessage="#{bundle.EditSnimioRequiredMessage_izvodjacId}">
+                        <f:selectItems value="#{izvodjacController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditSnimioLabel_albumId}" for="albumId" />
+                    <h:selectOneMenu id="albumId" value="#{snimioController.selected.albumId}" title="#{bundle.EditSnimioTitle_albumId}" required="true" requiredMessage="#{bundle.EditSnimioRequiredMessage_albumId}">
+                        <f:selectItems value="#{albumController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{snimioController.update}" value="#{bundle.EditSnimioSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditSnimioViewLink}"/>
+                <br />
+                <h:commandLink action="#{snimioController.prepareList}" value="#{bundle.EditSnimioShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditSnimioIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateIzvodjacTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateIzvodjacLabel_izvodjacId}" for="izvodjacId" />
+                    <h:inputText id="izvodjacId" value="#{izvodjacController.selected.izvodjacId}" title="#{bundle.CreateIzvodjacTitle_izvodjacId}" required="true" requiredMessage="#{bundle.CreateIzvodjacRequiredMessage_izvodjacId}"/>
+                    <h:outputLabel value="#{bundle.CreateIzvodjacLabel_naziv}" for="naziv" />
+                    <h:inputText id="naziv" value="#{izvodjacController.selected.naziv}" title="#{bundle.CreateIzvodjacTitle_naziv}" />
+                    <h:outputLabel value="#{bundle.CreateIzvodjacLabel_kontaktTelefon}" for="kontaktTelefon" />
+                    <h:inputText id="kontaktTelefon" value="#{izvodjacController.selected.kontaktTelefon}" title="#{bundle.CreateIzvodjacTitle_kontaktTelefon}" />
+                    <h:outputLabel value="#{bundle.CreateIzvodjacLabel_mail}" for="mail" />
+                    <h:inputText id="mail" value="#{izvodjacController.selected.mail}" title="#{bundle.CreateIzvodjacTitle_mail}" />
+                    <h:outputLabel value="#{bundle.CreateIzvodjacLabel_webAdresa}" for="webAdresa" />
+                    <h:inputText id="webAdresa" value="#{izvodjacController.selected.webAdresa}" title="#{bundle.CreateIzvodjacTitle_webAdresa}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{izvodjacController.create}" value="#{bundle.CreateIzvodjacSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{izvodjacController.prepareList}" value="#{bundle.CreateIzvodjacShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateIzvodjacIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

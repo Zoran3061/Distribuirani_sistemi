@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateAlbumTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateAlbumLabel_albumId}" for="albumId" />
+                    <h:inputText id="albumId" value="#{albumController.selected.albumId}" title="#{bundle.CreateAlbumTitle_albumId}" required="true" requiredMessage="#{bundle.CreateAlbumRequiredMessage_albumId}"/>
+                    <h:outputLabel value="#{bundle.CreateAlbumLabel_nazivAlbuma}" for="nazivAlbuma" />
+                    <h:inputText id="nazivAlbuma" value="#{albumController.selected.nazivAlbuma}" title="#{bundle.CreateAlbumTitle_nazivAlbuma}" />
+                    <h:outputLabel value="#{bundle.CreateAlbumLabel_datumIzdavanjaAlbima}" for="datumIzdavanjaAlbima" />
+                    <h:inputText id="datumIzdavanjaAlbima" value="#{albumController.selected.datumIzdavanjaAlbima}" title="#{bundle.CreateAlbumTitle_datumIzdavanjaAlbima}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{albumController.create}" value="#{bundle.CreateAlbumSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{albumController.prepareList}" value="#{bundle.CreateAlbumShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateAlbumIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

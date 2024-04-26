@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditKomercijalniKoncertTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditKomercijalniKoncertLabel_komercijalniId}" for="komercijalniId" />
+                    <h:inputText id="komercijalniId" value="#{komercijalniKoncertController.selected.komercijalniId}" title="#{bundle.EditKomercijalniKoncertTitle_komercijalniId}" required="true" requiredMessage="#{bundle.EditKomercijalniKoncertRequiredMessage_komercijalniId}"/>
+                    <h:outputLabel value="#{bundle.EditKomercijalniKoncertLabel_cenaUlaznice}" for="cenaUlaznice" />
+                    <h:inputText id="cenaUlaznice" value="#{komercijalniKoncertController.selected.cenaUlaznice}" title="#{bundle.EditKomercijalniKoncertTitle_cenaUlaznice}" />
+                    <h:outputLabel value="#{bundle.EditKomercijalniKoncertLabel_ugovorId}" for="ugovorId" />
+                    <h:selectOneMenu id="ugovorId" value="#{komercijalniKoncertController.selected.ugovorId}" title="#{bundle.EditKomercijalniKoncertTitle_ugovorId}" required="true" requiredMessage="#{bundle.EditKomercijalniKoncertRequiredMessage_ugovorId}">
+                        <f:selectItems value="#{ugovorController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditKomercijalniKoncertLabel_koncertId}" for="koncertId" />
+                    <h:selectOneMenu id="koncertId" value="#{komercijalniKoncertController.selected.koncertId}" title="#{bundle.EditKomercijalniKoncertTitle_koncertId}" >
+                        <f:selectItems value="#{koncertController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{komercijalniKoncertController.update}" value="#{bundle.EditKomercijalniKoncertSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditKomercijalniKoncertViewLink}"/>
+                <br />
+                <h:commandLink action="#{komercijalniKoncertController.prepareList}" value="#{bundle.EditKomercijalniKoncertShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditKomercijalniKoncertIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

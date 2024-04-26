@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateUgovorTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateUgovorLabel_ugovorId}" for="ugovorId" />
+                    <h:inputText id="ugovorId" value="#{ugovorController.selected.ugovorId}" title="#{bundle.CreateUgovorTitle_ugovorId}" required="true" requiredMessage="#{bundle.CreateUgovorRequiredMessage_ugovorId}"/>
+                    <h:outputLabel value="#{bundle.CreateUgovorLabel_izvodjacId}" for="izvodjacId" />
+                    <h:inputText id="izvodjacId" value="#{ugovorController.selected.izvodjacId}" title="#{bundle.CreateUgovorTitle_izvodjacId}" required="true" requiredMessage="#{bundle.CreateUgovorRequiredMessage_izvodjacId}"/>
+                    <h:outputLabel value="#{bundle.CreateUgovorLabel_menadzerId}" for="menadzerId" />
+                    <h:inputText id="menadzerId" value="#{ugovorController.selected.menadzerId}" title="#{bundle.CreateUgovorTitle_menadzerId}" required="true" requiredMessage="#{bundle.CreateUgovorRequiredMessage_menadzerId}"/>
+                    <h:outputLabel value="#{bundle.CreateUgovorLabel_brojUgovora}" for="brojUgovora" />
+                    <h:inputText id="brojUgovora" value="#{ugovorController.selected.brojUgovora}" title="#{bundle.CreateUgovorTitle_brojUgovora}" />
+                    <h:outputLabel value="#{bundle.CreateUgovorLabel_procenat}" for="procenat" />
+                    <h:inputText id="procenat" value="#{ugovorController.selected.procenat}" title="#{bundle.CreateUgovorTitle_procenat}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{ugovorController.create}" value="#{bundle.CreateUgovorSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{ugovorController.prepareList}" value="#{bundle.CreateUgovorShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateUgovorIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateHumanitarniKoncertTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateHumanitarniKoncertLabel_humanitarniId}" for="humanitarniId" />
+                    <h:inputText id="humanitarniId" value="#{humanitarniKoncertController.selected.humanitarniId}" title="#{bundle.CreateHumanitarniKoncertTitle_humanitarniId}" required="true" requiredMessage="#{bundle.CreateHumanitarniKoncertRequiredMessage_humanitarniId}"/>
+                    <h:outputLabel value="#{bundle.CreateHumanitarniKoncertLabel_nazivUstanove}" for="nazivUstanove" />
+                    <h:inputText id="nazivUstanove" value="#{humanitarniKoncertController.selected.nazivUstanove}" title="#{bundle.CreateHumanitarniKoncertTitle_nazivUstanove}" />
+                    <h:outputLabel value="#{bundle.CreateHumanitarniKoncertLabel_koncertId}" for="koncertId" />
+                    <h:selectOneMenu id="koncertId" value="#{humanitarniKoncertController.selected.koncertId}" title="#{bundle.CreateHumanitarniKoncertTitle_koncertId}" >
+                        <f:selectItems value="#{koncertController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{humanitarniKoncertController.create}" value="#{bundle.CreateHumanitarniKoncertSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{humanitarniKoncertController.prepareList}" value="#{bundle.CreateHumanitarniKoncertShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateHumanitarniKoncertIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

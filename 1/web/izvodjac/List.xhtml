@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListIzvodjacTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListIzvodjacEmpty}" rendered="#{izvodjacController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{izvodjacController.items.rowCount > 0}">
+                    <h:outputText value="#{izvodjacController.pagination.pageFirstItem + 1}..#{izvodjacController.pagination.pageLastItem + 1}/#{izvodjacController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{izvodjacController.previous}" value="#{bundle.Previous} #{izvodjacController.pagination.pageSize}" rendered="#{izvodjacController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{izvodjacController.next}" value="#{bundle.Next} #{izvodjacController.pagination.pageSize}" rendered="#{izvodjacController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{izvodjacController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListIzvodjacTitle_izvodjacId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.izvodjacId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListIzvodjacTitle_naziv}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.naziv}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListIzvodjacTitle_kontaktTelefon}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.kontaktTelefon}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListIzvodjacTitle_mail}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.mail}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListIzvodjacTitle_webAdresa}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.webAdresa}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{izvodjacController.prepareView}" value="#{bundle.ListIzvodjacViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{izvodjacController.prepareEdit}" value="#{bundle.ListIzvodjacEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{izvodjacController.destroy}" value="#{bundle.ListIzvodjacDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{izvodjacController.prepareCreate}" value="#{bundle.ListIzvodjacCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListIzvodjacIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListKoncertTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListKoncertEmpty}" rendered="#{koncertController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{koncertController.items.rowCount > 0}">
+                    <h:outputText value="#{koncertController.pagination.pageFirstItem + 1}..#{koncertController.pagination.pageLastItem + 1}/#{koncertController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{koncertController.previous}" value="#{bundle.Previous} #{koncertController.pagination.pageSize}" rendered="#{koncertController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{koncertController.next}" value="#{bundle.Next} #{koncertController.pagination.pageSize}" rendered="#{koncertController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{koncertController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKoncertTitle_koncertId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.koncertId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKoncertTitle_nazivKoncerta}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nazivKoncerta}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKoncertTitle_datumKoncerta}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.datumKoncerta}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKoncertTitle_lokacijaKoncerta}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.lokacijaKoncerta}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKoncertTitle_brojProdatihKarata}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.brojProdatihKarata}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{koncertController.prepareView}" value="#{bundle.ListKoncertViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{koncertController.prepareEdit}" value="#{bundle.ListKoncertEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{koncertController.destroy}" value="#{bundle.ListKoncertDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{koncertController.prepareCreate}" value="#{bundle.ListKoncertCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListKoncertIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

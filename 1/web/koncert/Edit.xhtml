@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditKoncertTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditKoncertLabel_koncertId}" for="koncertId" />
+                    <h:inputText id="koncertId" value="#{koncertController.selected.koncertId}" title="#{bundle.EditKoncertTitle_koncertId}" required="true" requiredMessage="#{bundle.EditKoncertRequiredMessage_koncertId}"/>
+                    <h:outputLabel value="#{bundle.EditKoncertLabel_nazivKoncerta}" for="nazivKoncerta" />
+                    <h:inputText id="nazivKoncerta" value="#{koncertController.selected.nazivKoncerta}" title="#{bundle.EditKoncertTitle_nazivKoncerta}" />
+                    <h:outputLabel value="#{bundle.EditKoncertLabel_datumKoncerta}" for="datumKoncerta" />
+                    <h:inputText id="datumKoncerta" value="#{koncertController.selected.datumKoncerta}" title="#{bundle.EditKoncertTitle_datumKoncerta}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditKoncertLabel_lokacijaKoncerta}" for="lokacijaKoncerta" />
+                    <h:inputText id="lokacijaKoncerta" value="#{koncertController.selected.lokacijaKoncerta}" title="#{bundle.EditKoncertTitle_lokacijaKoncerta}" />
+                    <h:outputLabel value="#{bundle.EditKoncertLabel_brojProdatihKarata}" for="brojProdatihKarata" />
+                    <h:inputText id="brojProdatihKarata" value="#{koncertController.selected.brojProdatihKarata}" title="#{bundle.EditKoncertTitle_brojProdatihKarata}" />
+                </h:panelGrid>
+                <h:commandLink action="#{koncertController.update}" value="#{bundle.EditKoncertSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditKoncertViewLink}"/>
+                <br />
+                <h:commandLink action="#{koncertController.prepareList}" value="#{bundle.EditKoncertShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditKoncertIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListSpisakPesamaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListSpisakPesamaEmpty}" rendered="#{spisakPesamaController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{spisakPesamaController.items.rowCount > 0}">
+                    <h:outputText value="#{spisakPesamaController.pagination.pageFirstItem + 1}..#{spisakPesamaController.pagination.pageLastItem + 1}/#{spisakPesamaController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{spisakPesamaController.previous}" value="#{bundle.Previous} #{spisakPesamaController.pagination.pageSize}" rendered="#{spisakPesamaController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{spisakPesamaController.next}" value="#{bundle.Next} #{spisakPesamaController.pagination.pageSize}" rendered="#{spisakPesamaController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{spisakPesamaController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSpisakPesamaTitle_spisakPesamaId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.spisakPesamaId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSpisakPesamaTitle_terminId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.terminId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSpisakPesamaTitle_pesmaId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.pesmaId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{spisakPesamaController.prepareView}" value="#{bundle.ListSpisakPesamaViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{spisakPesamaController.prepareEdit}" value="#{bundle.ListSpisakPesamaEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{spisakPesamaController.destroy}" value="#{bundle.ListSpisakPesamaDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{spisakPesamaController.prepareCreate}" value="#{bundle.ListSpisakPesamaCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListSpisakPesamaIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

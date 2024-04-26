@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditTerminTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditTerminLabel_terminId}" for="terminId" />
+                    <h:inputText id="terminId" value="#{terminController.selected.terminId}" title="#{bundle.EditTerminTitle_terminId}" required="true" requiredMessage="#{bundle.EditTerminRequiredMessage_terminId}"/>
+                    <h:outputLabel value="#{bundle.EditTerminLabel_koncertId}" for="koncertId" />
+                    <h:inputText id="koncertId" value="#{terminController.selected.koncertId}" title="#{bundle.EditTerminTitle_koncertId}" required="true" requiredMessage="#{bundle.EditTerminRequiredMessage_koncertId}"/>
+                    <h:outputLabel value="#{bundle.EditTerminLabel_izvodjacId}" for="izvodjacId" />
+                    <h:inputText id="izvodjacId" value="#{terminController.selected.izvodjacId}" title="#{bundle.EditTerminTitle_izvodjacId}" required="true" requiredMessage="#{bundle.EditTerminRequiredMessage_izvodjacId}"/>
+                    <h:outputLabel value="#{bundle.EditTerminLabel_vremeIzvodjenja}" for="vremeIzvodjenja" />
+                    <h:inputText id="vremeIzvodjenja" value="#{terminController.selected.vremeIzvodjenja}" title="#{bundle.EditTerminTitle_vremeIzvodjenja}" >
+                        <f:convertDateTime pattern="HH:mm:ss" />
+                    </h:inputText>
+                </h:panelGrid>
+                <h:commandLink action="#{terminController.update}" value="#{bundle.EditTerminSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditTerminViewLink}"/>
+                <br />
+                <h:commandLink action="#{terminController.prepareList}" value="#{bundle.EditTerminShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditTerminIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

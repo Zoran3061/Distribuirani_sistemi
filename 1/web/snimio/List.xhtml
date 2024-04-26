@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListSnimioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListSnimioEmpty}" rendered="#{snimioController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{snimioController.items.rowCount > 0}">
+                    <h:outputText value="#{snimioController.pagination.pageFirstItem + 1}..#{snimioController.pagination.pageLastItem + 1}/#{snimioController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{snimioController.previous}" value="#{bundle.Previous} #{snimioController.pagination.pageSize}" rendered="#{snimioController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{snimioController.next}" value="#{bundle.Next} #{snimioController.pagination.pageSize}" rendered="#{snimioController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{snimioController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSnimioTitle_snimioId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.snimioId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSnimioTitle_brojSati}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.brojSati}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSnimioTitle_izvodjacId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.izvodjacId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSnimioTitle_albumId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.albumId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{snimioController.prepareView}" value="#{bundle.ListSnimioViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{snimioController.prepareEdit}" value="#{bundle.ListSnimioEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{snimioController.destroy}" value="#{bundle.ListSnimioDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{snimioController.prepareCreate}" value="#{bundle.ListSnimioCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListSnimioIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

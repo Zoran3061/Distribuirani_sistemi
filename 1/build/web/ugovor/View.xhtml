@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewUgovorTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewUgovorLabel_ugovorId}"/>
+                    <h:outputText value="#{ugovorController.selected.ugovorId}" title="#{bundle.ViewUgovorTitle_ugovorId}"/>
+                    <h:outputText value="#{bundle.ViewUgovorLabel_izvodjacId}"/>
+                    <h:outputText value="#{ugovorController.selected.izvodjacId}" title="#{bundle.ViewUgovorTitle_izvodjacId}"/>
+                    <h:outputText value="#{bundle.ViewUgovorLabel_menadzerId}"/>
+                    <h:outputText value="#{ugovorController.selected.menadzerId}" title="#{bundle.ViewUgovorTitle_menadzerId}"/>
+                    <h:outputText value="#{bundle.ViewUgovorLabel_brojUgovora}"/>
+                    <h:outputText value="#{ugovorController.selected.brojUgovora}" title="#{bundle.ViewUgovorTitle_brojUgovora}"/>
+                    <h:outputText value="#{bundle.ViewUgovorLabel_procenat}"/>
+                    <h:outputText value="#{ugovorController.selected.procenat}" title="#{bundle.ViewUgovorTitle_procenat}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{ugovorController.destroyAndView}" value="#{bundle.ViewUgovorDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewUgovorEditLink}"/>
+                <br />
+                <h:commandLink action="#{ugovorController.prepareCreate}" value="#{bundle.ViewUgovorCreateLink}" />
+                <br />
+                <h:commandLink action="#{ugovorController.prepareList}" value="#{bundle.ViewUgovorShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewUgovorIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
